@@ -1,0 +1,118 @@
+# 📱 Mobile App Development Rules
+
+Bu proje, **SwiftUI ile geliştirilen iOS frontend** ve **TypeScript + Express.js tabanlı Node.js backend** bileşenlerinden oluşan modern, güvenli ve sürdürülebilir bir mobil uygulama geliştirme rehberidir.
+
+---
+
+## ⚙️ Genel Yapı
+
+- **Frontend (iOS)**: SwiftUI, Combine, MVVM
+- **Backend (API)**: Node.js (Express.js), TypeScript, REST
+- **Veritabanı**: MongoDB
+- **API bağlantısı**: HTTPS üzerinden REST
+- **Kod organizasyonu**:
+  - `frontend/` (SwiftUI App)
+  - `backend/` (Express API)
+  - `cursor/rules/` (bu rehber)
+
+---
+
+## 🧠 Backend Geliştirme Kuralları (Node.js, TypeScript, Next.js App Router)
+
+### Kod Yapısı ve Stili
+
+- 🔹 Modüler mimari (routes, controllers, services, types, utils)
+- 🔹 `function` ile saf fonksiyonlar tercih edilir
+- 🔹 Sınıf (class) kullanımından kaçınılır
+- 🔹 Değişken adlarında açıklayıcı fiiller: `isValid`, `hasError`, `fetchUser`
+- 🔹 Her dosya tek sorumluluğa sahip olmalıdır
+
+### TypeScript Kullanımı
+
+- 🔹 Her şey tiplenmelidir: `interface` kullan, `type` yerine tercih edilir
+- 🔹 `enum` yerine `const` haritaları kullanılır
+- 🔹 React bileşenleri için işlevsel bileşen + `FC<Props>` kullanılır
+
+### Dosya ve Adlandırma Kuralları
+
+- 🔹 `components/auth-wizard` → tireli küçük harf dizin isimleri
+- 🔹 Bileşenlerde `export const ComponentName = () => {}` yapısı
+- 🔹 Her bileşen kendi dizininde:
+  - `index.tsx`, `types.ts`, `helpers.ts`, `constants.ts`
+
+### UI ve Styling
+
+- 🔹 UI: Shadcn UI + Radix UI + Tailwind CSS
+- 🔹 Mobil öncelikli responsive tasarım
+- 🔹 Tailwind `@apply` yerine utility sınıflarını kullan
+
+### Performans ve Optimizasyon
+
+- 🔹 `use client` yalnızca Web API veya etkileşimli bileşenler için
+- 🔹 React Server Components (RSC) tercih edilir
+- 🔹 Dinamik `import()` ve `Suspense` ile lazy load yapılır
+- 🔹 Görseller `.webp`, `loading="lazy"` ve genişlik/yükseklik bilgisi ile
+
+### URL Durumu & Web Vitals
+
+- 🔹 `nuqs` ile URL parametreleri üzerinden durum yönetimi
+- 🔹 Web Vitals metrikleri (LCP, FID, CLS) izlenmeli
+
+---
+
+## 🍎 iOS Frontend Geliştirme Kuralları (Swift, SwiftUI)
+
+### Kod Yapısı
+
+- 🔹 `UI/`, `Core/`, `Features/`, `Resources/`
+- 🔹 MVVM mimarisi: `Model`, `View`, `ViewModel` ayrımı
+- 🔹 Protokol bazlı, sınıfsız (struct + extension) mimari
+- 🔹 Değer tipleri (`struct`) kullanımı tercih edilir
+
+### İsimlendirme Kuralları
+
+- 🔹 `camelCase` → değişken ve fonksiyonlar (`isLoading`, `fetchData`)
+- 🔹 `PascalCase` → `ViewModel`, `UserProfileView`
+- 🔹 Fonksiyonlar eylemle başlamalı: `loadUser()`, `saveToDisk()`
+
+### SwiftUI Geliştirme
+
+- 🔹 `@State`, `@StateObject`, `@ObservedObject` durum yönetimi
+- 🔹 Combine ile reaktif veri akışı
+- 🔹 Tüm ekran boyutları için `GeometryReader`, `SafeArea`
+- 🔹 Karanlık mod, erişilebilirlik ve dinamik font desteği
+- 🔹 SF Symbols ve sistem fontları kullanılmalı
+
+### Performans
+
+- 🔹 Görünümleri tembel yükle (`LazyVStack`, `@StateObject`)
+- 🔹 Ağ istekleri `async/await` ve `URLSession`
+- 🔹 CoreData veya UserDefaults ile veri yönetimi
+- 🔹 Anahtarlık ile güvenli veri saklama
+
+### Güvenlik
+
+- 🔹 Input doğrulama (email, parola, vs.)
+- 🔹 Anahtarlık (Keychain) ve App Transport Security (ATS)
+- 🔹 Biometrik kimlik doğrulama (Face ID, Touch ID)
+- 🔹 SSL pinning ve güvenli bağlantı gereklilikleri
+
+### Test ve Kalite
+
+- 🔹 XCTest ile birim testi, XCUITest ile UI testi
+- 🔹 Ana akışlar ve hata senaryoları test edilmeli
+- 🔹 CI/CD entegrasyonu (GitHub Actions, Fastlane önerilir)
+
+---
+
+## 🔄 Backend + Frontend Entegrasyonu
+
+- Swift tarafında API istekleri `async/await` ile yapılır:
+
+```swift
+guard let url = URL(string: "http://<backend-ip>:3000/api/example") else { return }
+let (data, _) = try await URLSession.shared.data(from: url)
+sadece türkçe cevap ver. kodlarımda değişiklik yaparken sürekli bana sor ve yapacağın şeyi anlatarak değişiklik yap kodun genel yapısını değiştirme sürekli hedef odaklı hareket et . 
+kodları değiştirirken hataları en doğru şekilde düzelt.
+mongoDB ile veritabanı oluştur ve bu veritabanını nasıl kullanmam gerektiğini anlat. ilk defa bu uygulamaları kullanıyormusum gibi her şeyi anlayacağım şekilde anlat.
+mongoDB ye hakim bir senior developer gibi düşün ve bana her şeyi anlat.
