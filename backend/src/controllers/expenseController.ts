@@ -14,14 +14,14 @@ export const createExpense = async (req: Request, res: Response): Promise<void> 
       date,
       userId,
       groupId,
-      type
+      type,
     });
 
     await expense.save();
 
     if (type === 'group' && groupId) {
       await Group.findByIdAndUpdate(groupId, {
-        $inc: { totalExpense: amount }
+        $inc: { totalExpense: amount },
       });
     }
 
@@ -43,13 +43,11 @@ export const getExpenses = async (req: Request, res: Response): Promise<void> =>
     if (startDate && endDate) {
       query.date = {
         $gte: new Date(startDate as string),
-        $lte: new Date(endDate as string)
+        $lte: new Date(endDate as string),
       };
     }
 
-    const expenses = await Expense.find(query)
-      .sort({ date: -1 })
-      .populate('groupId', 'name');
+    const expenses = await Expense.find(query).sort({ date: -1 }).populate('groupId', 'name');
 
     res.json(expenses);
   } catch (error) {
@@ -66,7 +64,7 @@ export const getExpenseStats = async (req: Request, res: Response): Promise<void
     if (startDate && endDate) {
       query.date = {
         $gte: new Date(startDate as string),
-        $lte: new Date(endDate as string)
+        $lte: new Date(endDate as string),
       };
     }
 
@@ -75,13 +73,13 @@ export const getExpenseStats = async (req: Request, res: Response): Promise<void
       {
         $group: {
           _id: '$category',
-          total: { $sum: '$amount' }
-        }
-      }
+          total: { $sum: '$amount' },
+        },
+      },
     ]);
 
     res.json(stats);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching expense stats', error });
   }
-}; 
+};
