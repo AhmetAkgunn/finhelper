@@ -1,14 +1,19 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import expenseRoutes from './routes/expenseRoutes';
 import groupRoutes from './routes/groupRoutes';
+import path from 'path';
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+app.get('/', (req: Request, res: Response) => {
+  res.sendFile(path.resolve(__dirname, '../public/ahmetim.png'));
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
